@@ -7,7 +7,7 @@ export const Room = () => {
     const name = searchParams.get('name');
 
     useEffect(() => {
-        // logic to init user here
+        
     }, [name])
 
     return <div>
