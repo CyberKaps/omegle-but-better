@@ -23,11 +23,16 @@ export class UserManager {
             name, socket
         })
         this.Queue.push(socket.id);
+        socket.send("lobby");
         this.clearQueue();
         this.initHandlers(socket);
     }
 
     removeUser(socketId: string) {
+        const user = this.users.find(x => x.socket.id == socketId);
+        if (!user) {
+
+        }
         this.users = this.users.filter(x => x.socket.id !== socketId);
         this.Queue = this.Queue.filter(x => x === socketId);
     }
@@ -37,9 +42,10 @@ export class UserManager {
             return;
         }
 
-
-        const user1 = this.users.find(x => x.socket.id === this.Queue.pop());
-        const user2 = this.users.find(x => x.socket.id === this.Queue.pop());
+        const id1 = this.Queue.pop()
+        const id2 = this.Queue.pop();
+        const user1 = this.users.find(x => x.socket.id === id1 );
+        const user2 = this.users.find(x => x.socket.id === id2);
 
         if (!user1 || !user2){
             return;
