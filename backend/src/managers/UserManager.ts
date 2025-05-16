@@ -28,7 +28,7 @@ export class UserManager {
     }
 
     removeUser(socketId: string) {
-        this.users = this.users.filter(x => x.socket.id === socketId);
+        this.users = this.users.filter(x => x.socket.id !== socketId);
         this.Queue = this.Queue.filter(x => x === socketId);
     }
 
